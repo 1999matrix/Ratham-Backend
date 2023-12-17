@@ -1,12 +1,12 @@
-import slot from "../model/slots.js";
-import bookedslot from "../model/bookedslots.js";
-import student from "../model/student.js";
+import slot from "../model/slots";
+import bookedslot from "../model/bookedslots";
+import student from "../model/student";
 export const getslots = async (req, res, next) => {
   try {
     const slots = await slot.find();
 
-    const filteredslots = await slots.map((c) => {
-      const { createdAt, updatedAt, __v, ...other } = c._doc;
+    const filteredslots = slots.map((c) => {
+      const { createdAt, updatedAt, __v, ...other } = c;
       return other;
     });
 
@@ -16,7 +16,7 @@ export const getslots = async (req, res, next) => {
   }
 };
 
-const updateslot = async (id) => {
+const updateslot = async (id, res) => {
   try {
     const slots = await slot.updateOne({ _id: id }, { status: "Fill" });
   } catch (err) {
@@ -33,10 +33,10 @@ export const bookslots = async (req, res, next) => {
       deanid: req.body.deanid,
       studentid: req.body.studentid,
       slotid: req.body.slotid,
-      studentname: studentdetails.name,
+      studentname: studentdetails?.name,
     });
     const bookedslots = await booking.save();
-    updateslot(req.body.slotid);
+    updateslot(req.body.slotid, res);
     res.status(200).json(bookedslots);
   } catch (err) {
     res.json(err);
@@ -46,8 +46,8 @@ export const getpendingsessions = async (req, res) => {
   try {
     const slots = await bookedslot
       .find({ deanid: req.params.deanid })
-      .populate("slotid");
-    const filteredslots = await slots.map((c) => {
+      .populate("slotid") as any;
+    const filteredslots = slots.map((c) => {
       const details = {
         Yourid: c.deanid,
         slotname: c.slotid.slotname,

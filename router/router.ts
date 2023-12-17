@@ -1,9 +1,9 @@
-import express from "express";
-import { dnlogin, dnregister } from "../controller/dean.js";
-import { stdlogin, stdregister } from "../controller/student.js";
-import { getpendingsessions, getslots } from "../controller/slot.js";
-import { bookslots } from "../controller/slot.js";
-import { verifytoken } from "../controller/verify.js";
+import * as express from "express";
+import { dnlogin, dnregister } from "../controller/dean";
+import { stdlogin, stdregister } from "../controller/student";
+import { getpendingsessions, getslots } from "../controller/slot";
+import { bookslots } from "../controller/slot";
+import { verifytoken } from "../controller/verify";
 const router = express.Router();
 
 router.post("/student/register", stdregister);

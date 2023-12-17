@@ -1,9 +1,10 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import User from "../model/dean.js";
-import slots from "../model/slots.js";
+import User from "../model/dean";
+import slots from "../model/slots";
+import { Document, Types } from "mongoose";
 
-const createslot = async (id, name) => {
+const createslot = async (id: string, name: string) => {
   const slot1 = new slots({
     deanid: id,
     deanname: name,
@@ -51,11 +52,11 @@ export const dnlogin = async (req, res, next) => {
     );
     if (!passwordcorrect) return res.status(401).json("incorrect password");
 
-    const token = jwt.sign({ id: user.universityid }, process.env.SecretKey);
+    const token = jwt.sign({ id: user.universityid }, process.env.SecretKey!);
 
     const { password, ...other } = user;
 
-    res.status(200).json({ token: token });
+    res.status(200).json(token);
   } catch (err) {
     res.json(err);
   }

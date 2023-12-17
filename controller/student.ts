@@ -1,6 +1,6 @@
 // import bcrypt from "bcrypt";
 // import jwt from "jsonwebtoken";
-// import User from "../model/student.js";
+// import User from "../model/student";
 
 // export const stdregister = async (req, res) => {
 //   try {
@@ -40,7 +40,7 @@
 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import User from "../model/student.js";
+import User from "../model/student";
 
 export const stdregister = async (req, res) => {
   try {

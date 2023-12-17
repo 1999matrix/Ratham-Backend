@@ -1,14 +1,14 @@
-import express from "express";
+import * as express from "express";
 import mongoose, { connect } from "mongoose";
-import dotenv from "dotenv";
-import routes from "./router/router.js";
+import * as dotenv from "dotenv";
+import routes from "./router/router";
 const app = express();
 
 dotenv.config();
 const PORT = process.env.PORT || 4000;
 const mongoConnect = async () => {
   try {
-    await mongoose.connect(process.env.MongoUrl);
+    await mongoose.connect(process.env.MongoUrl!);
     console.log("success");
   } catch (error) {
     throw error;

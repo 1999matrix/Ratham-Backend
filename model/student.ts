@@ -4,16 +4,16 @@ const StudentSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+    //   required: true,
     },
     universityid: {
       type: Number,
-      required: true,
+    //   required: true,
       unique: true,
     },
     password: {
       type: String,
-      required: true,
+    //   required: true,
     },
   },
   { timestamps: true }
